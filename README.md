@@ -1,0 +1,6 @@
+# sodium-browserify
+
+
+## License
+
+MIT
