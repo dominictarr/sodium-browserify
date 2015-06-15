@@ -21,10 +21,6 @@ function bufferize(fn) {
     return r
   }
 }
-;[
-  'sign_seed_keypair',
-  'sign_keypair',
-]
 
 function keys (k) {
   return {
@@ -39,6 +35,10 @@ exports.crypto_sign_seed_keypair = function (seed) {
 
 exports.crypto_sign_keypair = function () {
   return keys(sodium.crypto_sign_keypair())
+}
+
+exports.crypto_box_keypair = function () {
+  return keys(sodium.crypto_box_keypair())
 }
 
 ;[
