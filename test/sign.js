@@ -2,6 +2,7 @@
 var tape = require('tape')
 var data = require('./data').sign
 var inputs = require('./data').inputs
+
 module.exports = function (sodium) {
 
   var keys = sodium.crypto_sign_seed_keypair(data.seed)
@@ -13,8 +14,6 @@ module.exports = function (sodium) {
     t.end()
 
   })
-
-  console.log(inputs, data)
 
   inputs.forEach(function (msg, i) {
     tape('verify_detached: ' + msg, function (t) {

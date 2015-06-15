@@ -3,7 +3,7 @@ var sodium = require('sodium/build/Release/sodium')
 
 var random = require('crypto').randomBytes
 
-var seed = random(32)
+var seed = random(32), nonce = random(24), key = random(32)
 var k = sodium.crypto_sign_seed_keypair(seed)
 
 function B (b) { return b.toString('base64') }
@@ -37,6 +37,9 @@ function map(fn, args) {
   })
 }
 
+var alice = sodium.crypto_box_keypair()
+var bob = sodium.crypto_box_keypair()
+
 var data = {
   inputs: inputs,
   sign: {
@@ -44,7 +47,36 @@ var data = {
     secretKey: B(k.secretKey),
     seed: B(seed),
     sign_detached: map(sodium.crypto_sign_detached, [k.secretKey]),
-    sign: map(sodium.crypto_sign, [k.secretKey])
+    sign: map(sodium.crypto_sign, [k.secretKey]),
+    curve25516_publicKey: B(
+      sodium.crypto_sign_ed25519_pk_to_curve25519(k.publicKey)
+    ),
+    curve25516_secretKey: B(
+      sodium.crypto_sign_ed25519_sk_to_curve25519(k.secretKey)
+    ),
+
+  },
+  box: {
+    alice_publicKey: B(alice.publicKey),
+    alice_secretKey: B(alice.secretKey),
+    bob_publicKey: B(bob.publicKey),
+    bob_secretKey: B(bob.secretKey),
+    scalarmult: B(sodium.crypto_scalarmult(bob.secretKey, alice.publicKey)),
+    nonce: B(nonce),
+    box_easy: map(sodium.crypto_box_easy, [nonce, bob.publicKey, alice.secretKey])
+  },
+  secretbox: {
+    key: key,
+    secretbox_easy: map(sodium.crypto_secretbox_easy, [nonce, key])
+  },
+  scalarmult: {
+
+  },
+  hash: {
+
+  },
+  auth: {
+
   }
 }
 

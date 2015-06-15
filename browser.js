@@ -45,7 +45,10 @@ exports.crypto_sign_keypair = function () {
   'sign_verify_detached',
   'sign_detached',
   'sign',
-  'sign_open'
+  'sign_open',
+  'scalarmult',
+  'box_easy',
+  'box_open_easy'
 ].forEach(function (name) {
   exports['crypto_'+name] = bufferize(sodium['crypto_'+name])
 })
