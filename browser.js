@@ -1,4 +1,3 @@
-
 var sodium = require('libsodium-wrappers')
 
 function I(b) {
@@ -6,8 +5,8 @@ function I(b) {
 }
 
 function B(b) {
-  console.log((b instanceof Uint8Array) ? new Buffer(b) : b)
-  return (b instanceof Uint8Array) ? new Buffer(b) : b
+  console.log((b instanceof Uint8Array) ? Buffer._augment(b) : b)
+  return (b instanceof Uint8Array) ? Buffer._augment(b) : b
 }
 
 function bufferize(fn) {
@@ -48,7 +47,12 @@ exports.crypto_box_keypair = function () {
   'sign_open',
   'scalarmult',
   'box_easy',
-  'box_open_easy'
+  'box_open_easy',
+  'box_seal',
+  'box_seal_open',
+  'box_seed_keypair'
 ].forEach(function (name) {
   exports['crypto_'+name] = bufferize(sodium['crypto_'+name])
 })
+
+exports['randombytes_buf'] = bufferize(sodium.randombytes_buf)
