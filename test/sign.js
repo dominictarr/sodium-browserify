@@ -1,4 +1,5 @@
 
+Buffer = require('buffer/').Buffer
 var tape = require('tape')
 var data = require('./data').sign
 var inputs = require('./data').inputs
