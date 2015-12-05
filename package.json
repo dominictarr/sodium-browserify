@@ -9,14 +9,17 @@
   },
   "dependencies": {
     "libsodium-wrappers": "^0.2.9",
+    "sha.js": "^2.4.4",
     "sodium": "^1.0.19"
   },
   "devDependencies": {
+    "chloride": "^1.0.23",
+    "json-buffer": "^2.0.11",
     "tape": "~4.0.0"
   },
   "scripts": {
-    "prepublish": "npm ls &&  npm test",
-    "test": "set -e; for t in test/*.js; do node $t; done"
+    "prepublish": "npm ls && node test.js",
+    "test": "node test.js"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT"
