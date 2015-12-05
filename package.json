@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "libsodium-wrappers": "^0.2.9",
-    "sha.js": "^2.4.4",
-    "sodium": "^1.0.19"
+    "sha.js": "^2.4.4"
   },
   "devDependencies": {
     "chloride": "^1.0.23",
