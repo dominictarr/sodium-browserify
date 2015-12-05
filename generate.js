@@ -1,5 +1,5 @@
 
-var sodium = require('chloride/build/Release/sodium')
+var sodium = require('chloridedown/build/Release/sodium')
 var crypto = require('crypto')
 var seed = crypto.randomBytes(32)
 var JSONB = require('json-buffer')
