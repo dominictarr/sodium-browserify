@@ -1,2 +1,2 @@
 
-require('chloride-test')(require('./index'))
+process.exit(require('chloride-test')(require('./index')).fail)
