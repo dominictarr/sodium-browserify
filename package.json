@@ -9,12 +9,11 @@
   },
   "dependencies": {
     "libsodium-wrappers": "^0.2.9",
-    "sha.js": "^2.4.4"
+    "sha.js": "^2.4.4",
+    "tweetnacl": "^0.14.1"
   },
   "devDependencies": {
-    "chloridedown": "^1.0.22",
-    "json-buffer": "^2.0.11",
-    "tape": "~4.0.0"
+    "chloride-test": "^1.0.0"
   },
   "scripts": {
     "prepublish": "npm ls && node test.js",
@@ -23,3 +22,5 @@
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT"
 }
+
+

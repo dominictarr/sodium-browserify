@@ -1,3 +1,4 @@
 
-module.exports = require('chloride/build/Release/sodium')
-module.exports.api = module.exports
+//only exports browser api. use chloride module
+//to get automatic fallbacks!
+module.exports = require('./browser')
