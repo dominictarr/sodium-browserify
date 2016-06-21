@@ -13,7 +13,7 @@
     "tweetnacl": "^0.14.1"
   },
   "devDependencies": {
-    "chloride-test": "^1.0.0"
+    "chloride-test": "^1.0.1"
   },
   "scripts": {
     "prepublish": "npm ls && node test.js",
