@@ -13,11 +13,12 @@
     "tweetnacl": "^0.14.1"
   },
   "devDependencies": {
-    "chloride-test": "^1.0.0"
+    "chloride-test": "^1.0.0",
+    "standard": "^7.1.2"
   },
   "scripts": {
     "prepublish": "npm ls && node test.js",
-    "test": "node test.js"
+    "test": "standard && node test.js"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT"
