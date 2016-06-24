@@ -1,20 +1,21 @@
 
 var sodium = require('libsodium-wrappers')
 
-function I(b) {
+function I (b) {
   return Buffer.isBuffer(b) ? new Uint8Array(b) : b
 }
 
-function B(b) {
+function B (b) {
   return (b instanceof Uint8Array) ? new Buffer(b) : b
 }
 
-function bufferize(fn) {
-  if('function' !== typeof fn)
+function bufferize (fn) {
+  if (typeof fn !== 'function') {
     throw new Error('not a function')
+  }
   return function () {
     var args = [].map.call(arguments, I)
-    var r =  B(fn.apply(this, args))
+    var r = B(fn.apply(this, args))
     return r
   }
 }
@@ -54,13 +55,13 @@ exports.crypto_box_keypair = function () {
   'auth_verify',
   'hash'
 ].forEach(function (name) {
-  if(name === 'auth_verify') {
-    //this is inconsistent with sign_verify!!
+  if (name === 'auth_verify') {
+    // this is inconsistent with sign_verify!!
     var fn = bufferize(sodium.crypto_auth_verify)
-    exports['crypto_'+name] = function (msg, tok, key) { return fn(msg, tok, key) ? 0 : 1 }
+    exports['crypto_' + name] = function (msg, tok, key) { return fn(msg, tok, key) ? 0 : 1 }
+  } else {
+    exports['crypto_' + name] = bufferize(sodium['crypto_' + name])
   }
-  else
-    exports['crypto_'+name] = bufferize(sodium['crypto_'+name])
 })
 
 var Sha256 = require('sha.js/sha256')
@@ -70,11 +71,11 @@ exports.crypto_hash_sha256 = function (msg) {
 
 function nullIfThrew (fn) {
   return function () {
-    try { return fn.apply(this, [].slice.call(arguments)) }
-    catch (err) { return null }
+    try {
+      return fn.apply(this, [].slice.call(arguments))
+    } catch (err) { return null }
   }
 }
 
 exports.crypto_secretbox_open_easy = nullIfThrew(exports.crypto_secretbox_open_easy)
 exports.crypto_box_open_easy = nullIfThrew(exports.crypto_box_open_easy)
-
