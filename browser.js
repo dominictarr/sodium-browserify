@@ -78,3 +78,7 @@ function nullIfThrew (fn) {
 exports.crypto_secretbox_open_easy = nullIfThrew(exports.crypto_secretbox_open_easy)
 exports.crypto_box_open_easy = nullIfThrew(exports.crypto_box_open_easy)
 
+exports.randombytes = function (buf) {
+  new Buffer(sodium.randombytes_buf(buf.length)).copy(buf)
+  return null
+}
