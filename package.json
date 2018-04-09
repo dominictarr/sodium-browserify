@@ -1,7 +1,7 @@
 {
   "name": "sodium-browserify",
   "description": "browser polyfil for sodium",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "homepage": "https://github.com/dominictarr/sodium-browserify",
   "repository": {
     "type": "git",
