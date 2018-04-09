@@ -1,5 +1,5 @@
 
-var sodium = require('libsodium-wrappers')
+module.exports = function (sodium, exports) {
 
 function I(b) {
   return Buffer.isBuffer(b) ? new Uint8Array(b) : b
@@ -11,7 +11,8 @@ function B(b) {
 
 function bufferize(fn) {
   if('function' !== typeof fn)
-    throw new Error('not a function')
+    throw new Error('not a function:'+fn)
+
   return function () {
     var args = [].map.call(arguments, I)
     var r =  B(fn.apply(this, args))
@@ -59,8 +60,11 @@ exports.crypto_box_keypair = function () {
     var fn = bufferize(sodium.crypto_auth_verify)
     exports['crypto_'+name] = function (msg, tok, key) { return fn(msg, tok, key) ? 0 : 1 }
   }
-  else
+  else if(sodium['crypto_'+name]){
     exports['crypto_'+name] = bufferize(sodium['crypto_'+name])
+  }
+  else
+    throw new Error('missing:'+name)
 })
 
 var Sha256 = require('sha.js/sha256')
@@ -82,3 +86,7 @@ exports.randombytes = function (buf) {
   new Buffer(sodium.randombytes_buf(buf.length)).copy(buf)
   return null
 }
+return exports
+}
+
+
