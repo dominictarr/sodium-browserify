@@ -8,13 +8,13 @@
     "url": "git://github.com/dominictarr/sodium-browserify.git"
   },
   "dependencies": {
-    "libsodium-wrappers": "^0.7.3",
+    "libsodium-wrappers": "^0.7.4",
     "sha.js": "2.4.5",
-    "sodium-browserify-tweetnacl": "^0.2.3",
+    "sodium-browserify-tweetnacl": "^0.2.4",
     "tweetnacl": "^0.14.1"
   },
   "devDependencies": {
-    "chloride-test": "^1.0.1"
+    "chloride-test": "^1.2.4"
   },
   "scripts": {
     "prepublish": "npm ls && node test.js",
