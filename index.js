@@ -5,12 +5,12 @@
 //load tweetnacl first, so that it works sync, and everything is there.
 var exports = require('sodium-browserify-tweetnacl')
 
-for(var k in exports) (function (fn, k) {
-  if('function' == typeof fn)
+for(var k in exports) (function (k) {
+  if('function' == typeof exports[k])
     module.exports[k] = function () {
-      return fn.apply(this, [].slice.call(arguments))
+      return exports[k].apply(this, [].slice.call(arguments))
     }
-})(exports[k], k)
+})(k)
 
 //now load wasm which has to be async, ugh.
 var libsodium = require('libsodium-wrappers')
