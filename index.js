@@ -1,4 +1,3 @@
-
 //only exports browser api. use chloride module
 //to get automatic fallbacks!
 
@@ -18,6 +17,7 @@ for(var k in exports) (function (k) {
 //now load wasm which has to be async, ugh.
 var libsodium = require('libsodium-wrappers')
 libsodium.ready.then(function (value, what) {
+  console.log("loaded sodium browserify wasm version")
   require('./browser') (libsodium, exports)
   //set module.exports so that it 
   module.exports = exports
@@ -28,12 +28,3 @@ libsodium.ready.then(function (value, what) {
     process.exit(1)
   })
 })
-
-
-
-
-
-
-
-
-
