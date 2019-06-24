@@ -16,6 +16,16 @@ state or waiting for connections, so this will happen on it's own.
 
 If you try to use this before the wasm has loaded, it will fallback to tweetnacl.
 
+An event is available to ensure wasm is loaded before proceeding:
+
+```
+var s = require('sodium-browserify')
+
+s.events.on('sodium-browserify:wasm loaded', function() {
+  console.log("wasm was loaded!")
+})
+```
+
 Tests are generated from sodium, with values stored in JSON so that they can be run in the browser.
 
 ## License
