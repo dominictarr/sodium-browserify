@@ -1,9 +1,11 @@
-
 //only exports browser api. use chloride module
 //to get automatic fallbacks!
 
 //load tweetnacl first, so that it works sync, and everything is there.
 var exports = require('sodium-browserify-tweetnacl')
+
+var EventEmitter = require('events')
+module.exports.events = new EventEmitter()
 
 for(var k in exports) (function (k) {
   if('function' == typeof exports[k])
@@ -20,6 +22,7 @@ var libsodium = require('libsodium-wrappers')
 libsodium.ready.then(function (value, what) {
   require('./browser') (libsodium, exports)
   //set module.exports so that it 
+  module.exports.events.emit("sodium-browserify:wasm loaded")
   module.exports = exports
 }).catch(function (err) {
   //escape from promise land, ugh
@@ -28,12 +31,3 @@ libsodium.ready.then(function (value, what) {
     process.exit(1)
   })
 })
-
-
-
-
-
-
-
-
-
